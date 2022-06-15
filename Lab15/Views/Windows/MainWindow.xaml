@@ -1,0 +1,163 @@
+﻿<Window x:Class="Lab15.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab15"
+        xmlns:vm="clr-namespace:Lab15.ViewModels"
+        xmlns:cmd="clr-namespace:Lab15.Commands"
+        xmlns:md="clr-namespace:Lab15"
+        mc:Ignorable="d"
+        Title="Лабраторная 15, Белов Егор" Height="850" Width="500">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+            <TabControl>
+                <TabItem Header="Добавление">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Имя - " Grid.Row="0" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Врзраст - " Grid.Row="1" Grid.Column="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding PersonNameToAdd}"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PersonAgeToAdd}"/>
+                        <Button 
+                    Content="Добавить" Command="{Binding AddPerson}" 
+                    Grid.Row="2" Grid.Column="1"/>
+                        <TextBlock Text="{Binding AddMessage}" Grid.Row="2" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+            </TabItem>
+                
+                <TabItem Header="Удаление">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Номер элемента - " Grid.Row="0" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding IndexToRemove}"/>
+                        <Button 
+                    Content="Удалить" Command="{Binding RemoveIndex}" 
+                    Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Text="{Binding RemoveMessage}" Grid.Row="1" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </TabItem>
+                
+                <TabItem Header="Изменение">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock Text="Номер элемента - " Grid.Row="0" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding IndexToChange}" />
+
+                        <TextBlock Text="Имя - " Grid.Row="1" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PersonNameToChange}"/>
+                        <TextBlock Text="Возраст - " Grid.Row="2" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding PersonAgeToChange}"/>
+
+                        <Button 
+                    Content="Изменить" Command="{Binding ChangeItem}" 
+                    Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="{Binding ChangeMessage}" Grid.Row="3" Grid.Column="0" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </TabItem>
+                
+                <TabItem Header="Сохранить в файл">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+
+                        <Button 
+                    Content="Сохранить в бинарный файл" Command="{Binding LoadToBinary}" 
+                    Grid.Row="0"/>
+
+                        <Button 
+                    Content="Сохранить как JSON" Command="{Binding LoadToJSON}"
+                    Grid.Row="1"/>
+
+                        <Button 
+                    Content="Сохранить как XML" Command="{Binding LoadToXML}"
+                    Grid.Row="2"/>
+                    </Grid>
+                </TabItem>
+
+            <TabItem Header="Загрузить из файла">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+
+                    <Button 
+                    Content="Загрузить из бинарного файла" Command="{Binding LoadFromBinary}" 
+                    Grid.Row="0"/>
+
+                    <Button 
+                    Content="Загрузить из JSON" Command="{Binding LoadFromJSON}"
+                    Grid.Row="1"/>
+
+                    <Button 
+                    Content="Загрузить из XML" Command="{Binding LoadFromXML}"
+                    Grid.Row="2"/>
+                    <TextBlock Text="{Binding LoadMessage}" Grid.Row="3"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+                <TextBlock Text="{Binding CollectionTextView}" TextWrapping="Wrap" />
+            </ScrollViewer>
+    </Grid>
+</Window>
